@@ -2,19 +2,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.lab1a;
+package com.itcarlow.lab1b;
 
 /**
  *
  * @author Diarmuid Brennan
- * 
- * Create two threads and run them.
+ * 04/10/2021
+ * Create two threads and implements using runnable.
  */
 public class TestThread {
     public static void main(String args[]) {
-      ThreadDemo T1 = new ThreadDemo( "Thread-1");
-      T1.start();
-      ThreadDemo T2 = new ThreadDemo( "Thread-2");
-      T2.start();
-   } 
+        RunnableDemo R1 = new RunnableDemo( "Thread-1");
+        R1.start();
+        RunnableDemo R2 = new RunnableDemo( "Thread-2");
+        R2.start();
+    }   
+    
 }

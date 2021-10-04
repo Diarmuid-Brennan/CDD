@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.lab1a;
+package com.itcarlow.lab1a;
 
 /**
  *
  * @author Diarmuid Brennan
+ * 04/10/2021
  */
 class ThreadDemo extends Thread {
     //fields and methods
@@ -21,7 +22,7 @@ class ThreadDemo extends Thread {
    
    ThreadDemo( String name) {
       threadName = name;
-      System.out.println("Creating " +  threadName );
+      System.out.println("Creating a " +  threadName );
    }
    
    @Override
