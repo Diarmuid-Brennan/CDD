@@ -20,11 +20,18 @@ class ThreadDemo extends Thread {
     */
    private String threadName;
    
+   /**
+    * Constructor
+    * @param name - takes in the name of the thread
+    */
    ThreadDemo( String name) {
       threadName = name;
-      System.out.println("Creating a " +  threadName );
+      System.out.println("Creating " +  threadName );
    }
    
+   /**
+    * Method to run a thread
+    */
    @Override
    public void run() {
        /**
@@ -49,6 +56,9 @@ class ThreadDemo extends Thread {
       System.out.println("Thread " +  threadName + " exiting.");
    }
    
+   /**
+    * Method to start a thread
+    */
    @Override
    public void start () {
       System.out.println("Starting " +  threadName );

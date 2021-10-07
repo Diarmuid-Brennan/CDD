@@ -20,11 +20,18 @@ class RunnableDemo implements Runnable {
     */
    private String threadName;
    
+   /**
+    * Constructor
+    * @param name - takes in the name of the thread
+    */
    RunnableDemo( String name) {
       threadName = name;
       System.out.println("Creating " +  threadName );
    }
    
+   /**
+    * Method to run a thread
+    */
    @Override
    public void run() {
        /**
@@ -49,6 +56,9 @@ class RunnableDemo implements Runnable {
       System.out.println("Thread " +  threadName + " exiting.");
    }
    
+   /**
+    * Method to start a thread
+    */
    public void start () {
       System.out.println("Starting " +  threadName );
       if (t == null) {

@@ -8,7 +8,7 @@ package com.itcarlow.lab1b;
  *
  * @author Diarmuid Brennan
  * 04/10/2021
- * Create two threads and implements using runnable.
+ * Create two threads and implement using runnable extension.
  */
 public class TestThread {
     public static void main(String args[]) {

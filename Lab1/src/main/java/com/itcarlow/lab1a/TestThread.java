@@ -8,7 +8,7 @@ package com.itcarlow.lab1a;
  *
  * @author Diarmuid Brennan
  * 04/10/2021
- * Create two threads and run them.
+ * Create two threads extending Thread class and run them.
  */
 public class TestThread {
     public static void main(String args[]) {
