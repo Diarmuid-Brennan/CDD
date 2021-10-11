@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Mutex;
+package AtomicInteger;
 
 package com.itc.mutexexample;
 import java.text.SimpleDateFormat; 
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -16,32 +17,32 @@ import java.util.logging.Logger;
  * @author Diarmuid Brennan
  * 11/10/2021
  * Main class
- * Create multiple threads using runnable, assigning an initial integer value of 0.
- * Assign treads to a thread pool
- * Output total value 
+ * Create multiple threads using runnable, assigning an initial AtomicInteger value of 0.
+ * Assign threads to a thread pool
+ * Output total value of AtomicInteger once threads have completed their tasks and pool has shutdown
  */
 
 public class Main {
      // Maximum number of threads in thread pool
     /**
-    * Initialize the max number of threads that can be created
+    * Initialize the max number of threads to be created
     */
     static final int MAX_T = 4;             
   
     public static void main(String[] args)
     {
         /**
-        * Create an integer object, passing a value of 0 to it
+        * Create an AtomicInteger object, passing a value of 0 to it
         */
-        IntegerObj total= new IntegerObj(0);
+        AtomicInteger atomicInteger = new AtomicInteger();
         // creates four tasks
         /**
-        * Create four threads, passing the IntegerObj value to each
+        * Create four threads, passing the atomicInteger value to each
         */
-        Runnable r1 = new Task("task 1",total);
-        Runnable r2 = new Task("task 2",total);
-        Runnable r3 = new Task("task 3",total);
-        Runnable r4 = new Task("task 4",total);    
+        Runnable r1 = new Task("task 1", atomicInteger);
+        Runnable r2 = new Task("task 2", atomicInteger);
+        Runnable r3 = new Task("task 3", atomicInteger);
+        Runnable r4 = new Task("task 4", atomicInteger); 
           
         // creates a thread pool with MAX_T no. of 
         // threads as the fixed pool size(Step 2)
@@ -70,8 +71,8 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         /**
-        * Output the total intergerObj value once each thread has completed
+        * Output the total atomic Integer once each thread has completed
         */
-        System.out.println("total is: "+total.value);
+        System.out.println("total is: "+ atomicInteger.get());
     }
 }

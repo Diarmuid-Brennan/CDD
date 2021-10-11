@@ -13,7 +13,7 @@ public class IntegerObj {
     int value;
     /**
     * Constructor
-    * @param val - takes in an integer to assign to the Integer Object
+    * @param val - takes in an integer to assign to the IntegerObj value attribute
     */
     IntegerObj(int val) {
         this.value = val;
