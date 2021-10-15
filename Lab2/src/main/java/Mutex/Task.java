@@ -43,23 +43,17 @@ public class Task implements Runnable {
     {
         try
         {
-            semaphore.acquire();
-            try
+            for (int i = 0; i<500; i++)
             {
-                for (int i = 0; i<500; i++)
-                {
-                    total.inc();
-                    if (i%100==0){
-                       Thread.sleep(100); 
-                    }
-
-                }
-                System.out.println(name+" complete");
-            }
-            finally 
-            {
+                semaphore.acquire();
+                total.inc();
                 semaphore.release();
+                if (i%100==0){
+                   Thread.sleep(100); 
+                }
+
             }
+            System.out.println(name+" complete");
         }
         catch(InterruptedException e)
         {

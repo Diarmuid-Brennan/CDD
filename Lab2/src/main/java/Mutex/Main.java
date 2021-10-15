@@ -35,6 +35,8 @@ public class Main {
         */
         IntegerObj total= new IntegerObj(0);
         // creates four tasks
+        
+        
         /**
         * Create four threads, passing the IntegerObj value to each
         */
@@ -50,6 +52,7 @@ public class Main {
         */
         ExecutorService pool = Executors.newFixedThreadPool(MAX_T);  
          
+        long startTime = System.currentTimeMillis();
         // passes the Task objects to the pool to execute (Step 3)
         /**
         * Run each thread in the thread pool
@@ -63,12 +66,17 @@ public class Main {
         /**
         * Shutdown the thread pool
         */
-        pool.shutdown();    
+        pool.shutdown();  
+        
         try {
             Thread.sleep(2500);
         } catch (InterruptedException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        System.out.println(elapsedTime);
         /**
         * Output the total intergerObj value once each thread has completed
         */
