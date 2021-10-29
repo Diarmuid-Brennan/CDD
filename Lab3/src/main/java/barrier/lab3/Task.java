@@ -30,10 +30,13 @@ public class Task implements Runnable {
     static int totalThreads = 4;
     static int count = 0;
     /**
-    * Create two static semaphore, one set to released and one set to acquired
+    * Create three static semaphores, two set to released and one set to acquired
+    * one will act as a mutex lock to the count variable
+    * the other 2 will act as turnstile to prevent threads processing til a given number of threads have reached
     */
-    static Semaphore semaphore = new Semaphore(1);//semaphoer is set to released
-    static Semaphore semaphore1 = new Semaphore(0);//semaphoer is set to acquired
+    static Semaphore mutex = new Semaphore(1);//semaphoer is set to released
+    static Semaphore turnstile = new Semaphore(0);//semaphoer is set to acquired
+    static Semaphore turnstile2 = new Semaphore(1);//semaphoer is set to released
     /**
     * Constructor
     * @param task_1 - takes in the name of the thread
@@ -43,26 +46,58 @@ public class Task implements Runnable {
     }
     
     /**
-    * method that each thread can acquire a lock and increment the global count by 1
+     * method demonstrating a barrier in action using only semaphores
+    * each thread can acquire a lock and increment the global count by 1
     * Each thread will then be blocked until the count hits 4, using a semaphore 
-    * At this point each thread is released
+    * At this point each thread is released using a turnstile
+    * each thread then acquires a lock and decrements the global count by 1
+    * A second turnstile is implemented when the count reaches 0 each thread is released
+    * This is so that the barrier is reusable
     */
     public void run()
     {
         try
         {
-            semaphore.acquire();
+            //NON-REUSABLE
+//            mutex.acquire();
+//            count++;
+//            System.out.println(name + " arrived. Count = " + count );
+//            mutex.release();
+//            
+//            if(count == totalThreads) semaphore1.release();
+//
+//            turnstile.acquire();
+//            System.out.println(name + " released. Count = " + count );
+//            count--;
+//            turnstile.release();
+            //after final thread is released the turnstile is not reset to acquired again and cannot be reused
+            
+            //REUSABLE
+            mutex.acquire();
             count++;
             System.out.println(name + " arrived. Count = " + count );
-            semaphore.release();
+            if(count == totalThreads)
+            {
+                turnstile2.acquire();//lock the second turnstile first
+                turnstile.release();//then release the firsst turnstile
+            }
+            mutex.release();
             
-            if(count == totalThreads) semaphore1.release();
-
-            semaphore1.acquire();
+            turnstile.acquire();
+            turnstile.release();
+            
+            mutex.acquire();
             System.out.println(name + " released. Count = " + count );
             count--;
-            semaphore1.release();
+            if(count == 0)
+            {
+                turnstile.acquire();//lock the first turnstile first
+                turnstile2.release();//then release the firsst turnstile
+            }
+            mutex.release();
             
+            turnstile2.acquire();
+            turnstile2.release();
         }
         catch(InterruptedException e)
         {
