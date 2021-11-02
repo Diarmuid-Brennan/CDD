@@ -12,7 +12,7 @@ import java.util.concurrent.Semaphore;
  *
  * @author Diarmuid Brennan
  * 31/10/2021
- * Fifo class - creates a queue of semaphores 
+ * Fifo class - creates a fifo queue of semaphores to ensure no thread  is starved
  */
 public class FifoQueue {
     Queue<Semaphore> q = new LinkedList<>();
@@ -23,12 +23,13 @@ public class FifoQueue {
         
     }
     
-    public void addToQueue(Semaphore sem)
+    public void addToQueue(Semaphore s)
     {
+ //       q.add(s);
         try
         {
             mutex.acquire();
-            q.add(sem);
+            q.add(s);
             mutex.release();
         }
         catch(InterruptedException e)
@@ -40,6 +41,8 @@ public class FifoQueue {
     
     public void releaseFromQueue()
     {
+//        Semaphore s = q.remove();
+//        s.release();
         try
         {
             mutex.acquire();

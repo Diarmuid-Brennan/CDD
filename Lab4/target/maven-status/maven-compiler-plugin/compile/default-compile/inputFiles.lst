@@ -1,5 +1,5 @@
-/home/liuxvm/NetBeansProjects/Lab4/src/main/java/queue/lab4/FifoQueue.java
-/home/liuxvm/NetBeansProjects/Lab4/src/main/java/queue/lab4/LeaderTask.java
-/home/liuxvm/NetBeansProjects/Lab4/src/main/java/queue/lab4/Main.java
-/home/liuxvm/NetBeansProjects/Lab4/src/main/java/queue/lab4/FollowerTask.java
-/home/liuxvm/NetBeansProjects/Lab4/src/main/java/queue/lab4/QueueClass.java
+/home/liuxvm/NetBeansProjects/CDD/Lab4/src/main/java/queue/lab4/FollowerTask.java
+/home/liuxvm/NetBeansProjects/CDD/Lab4/src/main/java/queue/lab4/LeaderTask.java
+/home/liuxvm/NetBeansProjects/CDD/Lab4/src/main/java/queue/lab4/QueueClass.java
+/home/liuxvm/NetBeansProjects/CDD/Lab4/src/main/java/queue/lab4/FifoQueue.java
+/home/liuxvm/NetBeansProjects/CDD/Lab4/src/main/java/queue/lab4/Main.java

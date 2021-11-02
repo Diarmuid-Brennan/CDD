@@ -21,8 +21,6 @@ public class Task implements Runnable {
     * Every thread is given a name and an IntegerObj value
     */
     private String name;
-//    private boolean locked = true;
-//    private boolean released = true;
     /**
     * Create a static variable to hold the total number of threads, global to each thread
     * Create a static variable to hold the current count of threads, global to each thread

@@ -16,16 +16,20 @@ import java.util.logging.Logger;
  * Creating threads and implement a Queue using semaphores
  */
 public class Main {
-    
+    /**
+    * Initialize max number of threads
+    */
     static final int MAX_T = 4;
     
   
     public static void main(String[] args)
     {
-        final QueueClass q = new QueueClass();
-        // creates four tasks
         /**
-        * Create four tasks
+        * Create Queue Class object
+        */
+        final QueueClass q = new QueueClass();
+        /**
+        * Create tasks
         */
         Runnable r1 = new FollowerTask("Follower task 1", q);
         Runnable r2 = new FollowerTask("Follower task 2", q);
@@ -38,6 +42,18 @@ public class Main {
         Runnable r4 = new FollowerTask("Follower task 4", q); 
         Runnable r7 = new LeaderTask("Leader task 3", q);
         Runnable r8 = new LeaderTask("Leader task 4", q); 
+        
+         Runnable r11 = new FollowerTask("Follower task 1", q);
+        Runnable r22 = new FollowerTask("Follower task 2", q);
+        
+        
+        Runnable r52 = new LeaderTask("Leader task 1", q);
+        Runnable r62= new LeaderTask("Leader task 2", q);
+        
+        Runnable r32 = new FollowerTask("Follower task 3", q);
+        Runnable r42 = new FollowerTask("Follower task 4", q); 
+        Runnable r72 = new LeaderTask("Leader task 3", q);
+        Runnable r82 = new LeaderTask("Leader task 4", q); 
           
         // creates a thread pool with MAX_T no. of 
         // threads as the fixed pool size
@@ -59,6 +75,16 @@ public class Main {
         pool.execute(r4);
         pool.execute(r7);
         pool.execute(r8);
+        
+        pool.execute(r11);
+        pool.execute(r22);
+        pool.execute(r52);
+        pool.execute(r62);
+        
+        pool.execute(r32);
+        pool.execute(r42);
+        pool.execute(r72);
+        pool.execute(r82);
           
         // pool shutdown
         /**
