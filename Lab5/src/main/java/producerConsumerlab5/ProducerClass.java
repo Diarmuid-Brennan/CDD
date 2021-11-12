@@ -13,32 +13,45 @@ import java.util.concurrent.Semaphore;
  * Follower Task class - runs each follower thread 
  */
 public class ProducerClass implements Runnable {
-    /**
-    * Every thread is given a name and an IntegerObj value
-    * Every thread is given a shared queue class
-    */
+
     private String name;
     private BufferClass b;
-    Semaphore mySem = new Semaphore(0);
+    Semaphore mutex = new Semaphore(1);
     static int num = 0 ;
     private Event event ;
+    
     /**
     * Constructor
     * @param task_1 - takes in the name of the thread
-    * @param q - takes in queue shared by leader and follower class
+    * @param b - takes in buffer shared by producer and consumer threads
     */
     public ProducerClass(String task_1, BufferClass b) {
         name=task_1;
         this.b = b;
-        num++;
-        event = new Event(num) ;
+        
     }
     
-    /**
-     * run method executes queue classes joinFollowerQueue method 
+     /**
+     * run method increments the value of each event and executes buffer classes add method 
     */
     public void run()
     {
-       b.addEvent(event);
+        for(int i = 0; i < 10; i++)
+        {
+            try
+            {
+                mutex.acquire();
+                num++;
+                event = new Event(num) ;
+                b.addEvent(event);
+                mutex.release();
+            }
+            catch(InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+            
+        }
+       
     }
 }

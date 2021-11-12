@@ -26,23 +26,23 @@ public class Main {
     public static void main(String[] args)
     {
         /**
-        * Create Queue Class object
+        * Create Buffer Class object
         */
         final BufferClass b = new BufferClass();
         /**
         * Create tasks
         */
-        Runnable r1 = new ProducerTask("Producer", b);
-        Runnable r2 = new ProducerTask("Producer", b);
-        Runnable r3 = new ProducerTask("Producer", b);
-        Runnable r4 = new ProducerTask("Producer", b);
-        Runnable r5 = new ProducerTask("Producer", b);
-        
-        Runnable r11 = new ConsumerTask("Consumer", b);
-        Runnable r12 = new ConsumerTask("Consumer", b);
-        Runnable r13 = new ConsumerTask("Consumer", b);
-        Runnable r14 = new ConsumerTask("Consumer", b);
-        Runnable r15 = new ConsumerTask("Consumer", b);
+        Runnable r1 = new ProducerClass("Producer", b);
+        Runnable r2 = new ProducerClass("Producer", b);
+        Runnable r3 = new ProducerClass("Producer", b);
+        Runnable r4 = new ProducerClass("Producer", b);
+        Runnable r5 = new ProducerClass("Producer", b);
+       
+        Runnable r11 = new ConsumerClass("Consumer", b);
+        Runnable r12 = new ConsumerClass("Consumer", b);
+        Runnable r13 = new ConsumerClass("Consumer", b);
+        Runnable r14 = new ConsumerClass("Consumer", b);
+        Runnable r15 = new ConsumerClass("Consumer", b);
           
         // creates a thread pool with MAX_T no. of 
         // threads as the fixed pool size
@@ -57,13 +57,15 @@ public class Main {
         */
         pool.execute(r1);
         pool.execute(r2);
-        pool.execute(r3);
-        pool.execute(r4);
-        pool.execute(r5);
+       
         
 
         pool.execute(r11);
         pool.execute(r12);
+        
+        pool.execute(r3);
+        pool.execute(r4);
+        pool.execute(r5);
         pool.execute(r13);
         pool.execute(r14);
         pool.execute(r15);

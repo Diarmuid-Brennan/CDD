@@ -6,18 +6,23 @@ package producerConsumerlab5;
 
 /**
  *
- * @author liuxvm
+ * @author Diarmuid Brennan
+ * 08/11/2021
+ * Event class 
  */
 public class Event {
     int value;
     /**
     * Constructor
-    * @param val - takes in an integer to assign to the IntegerObj value attribute
+    * @param val - takes in an integer to assign to the Event value attribute
     */
     Event(int val) {
         this.value = val;
     }
     
+    /**
+    * getValue method returns the integer value of the event
+    */
     public String getValue(){
         return "This is the num " + value ;
     }

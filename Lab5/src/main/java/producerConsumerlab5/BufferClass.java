@@ -11,37 +11,42 @@ import java.util.concurrent.Semaphore;
 /**
  *
  * @author Diarmuid Brennan
- * 11/08/2021
- * BufferClass class - contains methods for adding follower and leader threads to queue
- * Allows only one leader and one follower to execute at a time before allowing the next threads through
+ * 08/11/2021
+ * BufferClass class - contains methods for adding and removing events from the buffer
+ * Buffer can only be accessed by one thread at a time
+ * Producers must wait if buffer is full and Consumers must wait if buffer is empty 
  */
 public class BufferClass {
-    /**
-    * Create a int variable to keep track of current number of leader threads
-    * Create a int variable to keep track of current number of follower threads
-    */
+
     private int empty = 0;
-    private int full = 5 ;
+    private int full = 4 ;
     /**
-    * Create four static semaphores, three set to released and one set to acquired
-    * one will act as a mutex lock to the count variables
-    * the other 3 will act to ensure only one leader and one follower can execute at any one time
+    * Create 3 static semaphores, one set to released, one set to acquired and one set the the size of the buffer
+    * one will act as a mutex lock managing access to the buffer
+    * the other 2 synchronize the producer and consumer threads so that they can only add/remove from the buffer when allowed
     */
     static Semaphore mutex = new Semaphore(1);//semaphoer is set to released
     static Semaphore producerCount = new Semaphore(0);
-    static Semaphore consumerCount = new Semaphore(0);
-    
+    static Semaphore consumerCount = new Semaphore(4);
+    /**
+    * Data structure to store the events
+    */
     Queue<Event> q = new LinkedList<>();
     
+    /**
+    *  @param event - event to be added to the buffer
+    * addEvent synchronises producer input to the buffer
+    * implements mutex when adding to the buffer
+    */
     public void addEvent(Event event)
     {
         try
         {
-            producerCount.acquire();
+            consumerCount.acquire();
             mutex.acquire();
             q.add(event);
             mutex.release();
-            consumerCount.release();
+            producerCount.release();
             
         }
         catch(InterruptedException e)
@@ -50,16 +55,21 @@ public class BufferClass {
         }
     }
     
+    /**
+    * consume synchronises consumer removing data from the buffer
+    * implements mutex when removing from the buffer
+    */
     public void consume()
     {
         try
         {
-            consumerCount.acquire();
+            producerCount.acquire();
             mutex.acquire();
             Event e = q.remove();
-            System.out.println(e.getValue());           
+                      
             mutex.release();
             consumerCount.release();
+            System.out.println(e.getValue()); 
             
         }
         catch(InterruptedException e)
