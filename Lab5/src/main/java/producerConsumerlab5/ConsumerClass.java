@@ -11,13 +11,15 @@ import static producerConsumerlab5.BufferClass.producerCount;
 
 /**
  *
- * @author liuxvm
+ * @author Diarmuid Brennan
+ * 08/11/2021
+ * ConsumerClass class - runs each consumer thread 
  */
 public class ConsumerClass implements Runnable {
 
     private String name;
     private BufferClass b;
-    Semaphore mutex = new Semaphore(1);
+    static Semaphore mutex = new Semaphore(1);
     /**
     * Constructor
     * @param task_1 - takes in the name of the thread
@@ -30,22 +32,19 @@ public class ConsumerClass implements Runnable {
     
     /**
      * run method executes buffer classes consume method 
+     * lock allows only one thread consume at a time
     */
     public void run()
     {
-       for(int i = 0; i < 10; i++)
+        try
         {
-            try
-            {
-                mutex.acquire();
-                b.consume();
-                mutex.release();
-            }
-            catch(InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-              
+            mutex.acquire();
+            b.consume();
+            mutex.release();
+        }
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
         }
     }
 } 

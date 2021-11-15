@@ -10,13 +10,13 @@ import java.util.concurrent.Semaphore;
  *
  * @author Diarmuid Brennan
  * 08/11/2021
- * Follower Task class - runs each follower thread 
+ * ProducerClass class - runs each producer thread 
  */
 public class ProducerClass implements Runnable {
 
     private String name;
     private BufferClass b;
-    Semaphore mutex = new Semaphore(1);
+    static Semaphore mutex = new Semaphore(1);
     static int num = 0 ;
     private Event event ;
     
@@ -33,25 +33,22 @@ public class ProducerClass implements Runnable {
     
      /**
      * run method increments the value of each event and executes buffer classes add method 
+     * mutex lock allows only one event to be carried at a time and to add to the buffer
     */
     public void run()
     {
-        for(int i = 0; i < 10; i++)
+        try
         {
-            try
-            {
-                mutex.acquire();
-                num++;
-                event = new Event(num) ;
-                b.addEvent(event);
-                mutex.release();
-            }
-            catch(InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-            
+            mutex.acquire();
+            num++;
+            event = new Event(num) ;
+            b.addEvent(event);
+            mutex.release();
         }
-       
+        catch(InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 }

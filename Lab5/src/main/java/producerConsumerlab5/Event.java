@@ -8,7 +8,8 @@ package producerConsumerlab5;
  *
  * @author Diarmuid Brennan
  * 08/11/2021
- * Event class 
+ * Event class- event gets created by a producer thread and added to the BufferClass queue
+ * event gets consumed by the consumer class and removed from the queue
  */
 public class Event {
     int value;

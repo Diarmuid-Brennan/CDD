@@ -14,7 +14,12 @@ import java.util.logging.Logger;
  *
  * @author Diarmuid Brennan
  * 08/11/2021
- * Creating threads and implement a Queue using semaphores
+ * Project demonstrates the Producer/Consumer event using semaphores
+ * Producer thread creates an event and adds it to the buffer
+ * Consumer thread consumes event from the buffer
+ * Threads must be synchronized when accessing the buffer
+ * Producer can only produce when there is room in the queue
+ * Consumer can only consume when the buffer is not empty
  */
 public class Main {
     /**

@@ -23,9 +23,9 @@ public class BufferClass {
     /**
     * Create 3 static semaphores, one set to released, one set to acquired and one set the the size of the buffer
     * one will act as a mutex lock managing access to the buffer
-    * the other 2 synchronize the producer and consumer threads so that they can only add/remove from the buffer when allowed
+    * the other 2 synchronize the producer and consumer threads so that they can only add/remove from the buffer when able
     */
-    static Semaphore mutex = new Semaphore(1);//semaphoer is set to released
+    static Semaphore mutex = new Semaphore(1);//semaphore is set to released
     static Semaphore producerCount = new Semaphore(0);
     static Semaphore consumerCount = new Semaphore(4);
     /**
@@ -37,6 +37,8 @@ public class BufferClass {
     *  @param event - event to be added to the buffer
     * addEvent synchronises producer input to the buffer
     * implements mutex when adding to the buffer
+    * increments the number of items/events in the queue
+    * decrements the number of spaces available in the queue
     */
     public void addEvent(Event event)
     {
@@ -45,6 +47,7 @@ public class BufferClass {
             consumerCount.acquire();
             mutex.acquire();
             q.add(event);
+            System.out.println(event.getValue() + " Added");
             mutex.release();
             producerCount.release();
             
@@ -58,6 +61,8 @@ public class BufferClass {
     /**
     * consume synchronises consumer removing data from the buffer
     * implements mutex when removing from the buffer
+    * increments the number of spaces available in the queue
+    * decrements the number of items/events in the queue
     */
     public void consume()
     {
@@ -69,7 +74,7 @@ public class BufferClass {
                       
             mutex.release();
             consumerCount.release();
-            System.out.println(e.getValue()); 
+            System.out.println(e.getValue() + " removed"); 
             
         }
         catch(InterruptedException e)
