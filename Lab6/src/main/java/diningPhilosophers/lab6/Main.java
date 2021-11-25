@@ -6,6 +6,7 @@ package diningPhilosophers.lab6;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,20 +23,22 @@ public class Main {
     /**
     * Initialize max number of threads
     */
-    static final int MAX_T = 5;
+    static final int MAX_T = 4;
     
   
     public static void main(String[] args)
     {
+
         /**
         * Create tasks
         */
-        Runnable r1 = new Dining("Task 1");
-        Runnable r2 = new Dining("Task 2");
-        Runnable r3 = new Dining("Task 3");
-        Runnable r4 = new Dining("Task 4");
-        Runnable r5 = new Dining("Task 5");
-       
+        Runnable r1 = new Dining("diner", 0);
+        Runnable r2 = new Dining("diner", 1);
+        Runnable r3 = new Dining("diner", 2);
+        Runnable r4 = new Dining("diner", 3);
+        Runnable r5 = new Dining("diner", 4);
+
+
           
         // creates a thread pool with MAX_T no. of 
         // threads as the fixed pool size
@@ -49,10 +52,11 @@ public class Main {
         * Run each thread in the thread pool
         */
         pool.execute(r1);
-        pool.execute(r2);   
+        pool.execute(r2);
         pool.execute(r3);
         pool.execute(r4);
         pool.execute(r5);
+
           
         // pool shutdown
         /**

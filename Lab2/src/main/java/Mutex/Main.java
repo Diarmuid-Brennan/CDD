@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -26,7 +27,7 @@ public class Main {
     /**
     * Initialize the max number of threads that can be created
     */
-    static final int MAX_T = 4;             
+    static final int MAX_T = 4; 
   
     public static void main(String[] args)
     {
@@ -34,16 +35,17 @@ public class Main {
         * Create an integer object, passing a value of 0 to it
         */
         IntegerObj total= new IntegerObj(0);
+        
         // creates four tasks
         
         
         /**
         * Create four threads, passing the IntegerObj value to each
         */
-        Runnable r1 = new Task("task 1",total);
-        Runnable r2 = new Task("task 2",total);
-        Runnable r3 = new Task("task 3",total);
-        Runnable r4 = new Task("task 4",total);    
+        Runnable r1 = new Task("task 1", total);
+        Runnable r2 = new Task("task 2", total);
+        Runnable r3 = new Task("task 3", total);
+        Runnable r4 = new Task("task 4", total);    
           
         // creates a thread pool with MAX_T no. of 
         // threads as the fixed pool size(Step 2)

@@ -32,6 +32,7 @@ public class Task implements Runnable {
     public Task(String task_1, IntegerObj total) {
         name=task_1;
         this.total = total;
+
     }
     
     /**
