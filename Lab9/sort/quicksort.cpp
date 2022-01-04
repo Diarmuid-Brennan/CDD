@@ -1,3 +1,4 @@
+//Diarmuid Brennan//07/12/2021
 // quicksort.cpp ---
 //
 // Filename: quicksort.cpp
@@ -57,7 +58,7 @@
 using namespace std ;
 
 
-const int LENGTH=2000;
+const int LENGTH=50000;
 
 //template <typename T>
 int partition (vector<int>& myArray , int low , int high ){
@@ -84,10 +85,15 @@ int quicksort(vector<int>& myArray , int low , int high ){
     int pivot=partition(myArray,low,high);
     //really we should only do this if each partition is above a certain size (1000 elements?)
     //otherwise the overhead outweighs any gains from using threads
-    #pragma omp task shared(myArray)
-    quicksort(myArray,low,pivot);
-    quicksort(myArray,pivot+1,high);
-    #pragma omp taskwait
+    if(LENGTH > 40000){
+       #pragma omp task shared(myArray)
+       quicksort(myArray,low,pivot);
+       quicksort(myArray,pivot+1,high);
+       #pragma omp taskwait
+    }else{
+        quicksort(myArray,low,pivot);
+        quicksort(myArray,pivot+1,high);
+    }
   return 1;
   }
   return 0;

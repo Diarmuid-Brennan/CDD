@@ -4,20 +4,6 @@
 // Description:
 // Author Diarmuid Brennan
 //Date: 07/12/2021
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or (at
-// your option) any later version.
-//
-// This program is distributed in the hope that it will be useful, but
-// WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with GNU Emacs.  If not, see <http://www.gnu.org/licenses/>.
-//
-//
 
 // Code:
 #include <iostream>
@@ -27,7 +13,7 @@
 
 void saxpy(unsigned long n, float a,float y[], float x[])
 {
-    //#pragma omp parallel for
+     #pragma omp parallel for
 	for (unsigned long i=0; i < n; ++i){
 		y[i]=a * x[i] + y[i];
 	}//for
@@ -40,6 +26,7 @@ int main(void){
   float x[size];
   /* initialize random seed: */
   srand (time(NULL));
+  #pragma omp parallel for
   for(unsigned long long int i=0;i<size;++i){
     y[i]=i*i;
     /* generate secret number between 1 and 1000000: */

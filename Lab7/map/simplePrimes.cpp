@@ -1,5 +1,3 @@
-//Diarmuid Brennan
-//7/12/2021
 # include <cstdlib>
 # include <iostream>
 # include <iomanip>

@@ -13,14 +13,12 @@ int main(void){
   float sum=0.0;
   /* initialize random seed: */
   srand (time(NULL));
-
-  #pragma omp parallel
   for(unsigned long long int i=0;i<SIZE;++i){
     /* generate secret number between 1 and 1000: */
     numberArray[i] = rand() % 1000 + 1;
   }
   clock_t begin = clock();
-  #pragma omp parallel for reduction (+:sum)
+ #pragma omp parallel for reduction (+:sum)
   for (unsigned long i=0; i < SIZE; ++i){
       sum=sum+numberArray[i];
   }//for

@@ -16,12 +16,13 @@ void show(void *u, int w, int h)
 	}
 	fflush(stdout);
 }
-#pragma omp parallel
+
 void evolve(void *u, int w, int h)
 {
 	unsigned (*univ)[w] = u;
 	unsigned new[h][w];
 
+        #pragma omp parallel
 	for_y for_x {
 		int n = 0;
 		for (int y1 = y - 1; y1 <= y + 1; y1++)
