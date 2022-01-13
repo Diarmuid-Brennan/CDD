@@ -1,3 +1,10 @@
+//
+/**
+ *
+ * @author Diarmuid Brennan
+ *7/12/2021
+ *simplePrimes example
+*/
 # include <cstdlib>
 # include <iostream>
 # include <iomanip>

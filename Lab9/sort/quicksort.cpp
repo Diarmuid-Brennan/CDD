@@ -1,4 +1,9 @@
-//Diarmuid Brennan//07/12/2021
+/**
+ *
+ * @author Diarmuid Brennan
+ * 21/11/2021
+ * parallelized quick sort example */
+
 // quicksort.cpp ---
 //
 // Filename: quicksort.cpp

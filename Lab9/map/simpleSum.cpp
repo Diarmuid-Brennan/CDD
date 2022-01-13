@@ -1,5 +1,9 @@
-//Diarmuid Brennan
-//07/12/2021
+/**
+ *
+ * @author Diarmuid Brennan
+ * 07/12/2021
+ * simpleSum example
+ */
 
 // Code:
 #include <iostream>

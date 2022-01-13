@@ -1,3 +1,9 @@
+/**
+ *
+ * @author Diarmuid Brennan
+ * 04/12/2021
+ * Demonstrate omp
+ */
 #include <omp.h>
 #include <stdio.h>
 int main(int argc, char *argv[]){

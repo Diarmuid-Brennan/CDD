@@ -1,3 +1,9 @@
+/**
+ *
+ * @author Diarmuid Brennan
+ * 13/01/2022
+ * Game of Life program parallelised
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -6,6 +12,7 @@
 #define for_x for (int x = 0; x < w; x++)
 #define for_y for (int y = 0; y < h; y++)
 #define for_xy for_x for_y
+///display game of life
 void show(void *u, int w, int h)
 {
 	int (*univ)[w] = u;
@@ -16,7 +23,7 @@ void show(void *u, int w, int h)
 	}
 	fflush(stdout);
 }
-
+///update surrounding grid values
 void evolve(void *u, int w, int h)
 {
 	unsigned (*univ)[w] = u;
@@ -47,7 +54,7 @@ void game(int w, int h)
 		usleep(200000);
 	}
 }
-
+///main
 int main(int c, char **v)
 {
 	int w = 0, h = 0;
